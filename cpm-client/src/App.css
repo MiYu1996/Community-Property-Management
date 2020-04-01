@@ -1,0 +1,126 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#root {
+    height: 100%;
+}
+
+.frame {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+.headbar {
+    display: flex;
+    width: 100%;
+    height: 64px;
+    background-color: #008080;
+}
+
+.headbar-logo {
+    width: 256px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    color: white;
+    opacity: .80;
+}
+
+.headbar-name {
+    flex-grow: 1;
+    padding-left: 23px;
+    display: flex;
+    align-items: center;
+    font-size: 2em;
+    color: white;
+}
+
+.headbar-user {
+    width: 256px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.headbar-user-bell {
+    margin-right: 10px;
+    font-size: x-large;
+    color: white;
+    opacity: .80;
+}
+
+.headbar-user-avatar {
+    margin-right: 10px;
+}
+
+.headbar-user-name {
+    color: white;
+    opacity: .80;
+}
+
+.frame-body {
+    flex-grow: 1;
+    display: flex;
+    flex-flow: row;
+}
+
+.leftmenu {
+    height: 100%;
+    width: 256px;
+}
+
+.leftmenu-shrink {
+    width: 40px;
+}
+
+.leftmenu, .ant-menu, .ant-menu-sub {
+    background-color: #2F3F3F !important;
+}
+
+.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-selected {
+    background-color: seagreen
+}
+
+.frame-content {
+    flex-grow: 1;
+}
