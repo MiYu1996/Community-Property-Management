@@ -1,6 +1,11 @@
 # CPM React Frontend
 ## Prototyping
 - [Demo Site](https://gf6a5h.axshare.com)
+### Notice
+1. Ant Design provides official [Axure Library](http://library.ant.design/), please download version 3.x if you have not it preinstalled
+2. Please only **Check Out** pages that you need to edit
+3. Please always **Check In** after done editing
+
 ### Guide
 1. Register [Axure Cloud](https://www.axure.cloud/) and send registered email to me
 2. Wait for and accept team invitation
