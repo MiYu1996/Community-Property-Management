@@ -2,7 +2,7 @@
 ## Prototyping
 - [Demo Site](https://gf6a5h.axshare.com)
 ### Notice
-1. Ant Design provides official [Axure Library](http://library.ant.design/), please download version 3.x if you have not it preinstalled
+1. Ant Design provides official [Axure Library](http://library.ant.design/), please download version 3.x if you don't have it preinstalled
 2. Please only **Check Out** pages that you need to edit
 3. Please always **Check In** after done editing
 
