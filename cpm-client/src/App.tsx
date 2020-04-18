@@ -1,86 +1,46 @@
 import React, { useState } from 'react';
-import { Menu, Avatar } from 'antd';
-import {
-    DashboardOutlined,
-    NotificationOutlined,
-    TeamOutlined,
-    InboxOutlined,
-    HomeOutlined,
-    BellOutlined,
-    UserOutlined
-} from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import './App.css'
 import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link,
-    useRouteMatch,
-    useParams
+    Redirect,
 } from "react-router-dom";
 
-function App() {
-    const [collapsed, setCollapsed] = useState(false)
+import { HeadBar } from './HeadBar'
+import { LeftMenu } from './LeftMenu'
+import { Login } from './login'
+import { Dashboard } from './dashboard'
+import { Announcement } from './announcement'
+import { Discussion } from './discussion'
+import { Question } from './question'
+
+const App = () => {
+    const [isLoggedIn, setLoggedIn] = useState(false)
 
     return (
-        <div className='frame'>
+        <div className='app'>
             <Router>
-                <div className='headbar'>
-                    <div className='headbar-logo'><HomeOutlined onClick={() => setCollapsed(!collapsed)} /></div>
-                    <div className='headbar-name'>Lorem ipsum Apartments</div>
-                    <div className='headbar-user'>
-                        <div className="headbar-user-bell"><BellOutlined /></div>
-                        <div className="headbar-user-avatar"><Avatar icon={<UserOutlined />} /></div>
-                        <div className="headbar-user-name">John Smith</div>
-                    </div>
-                </div>
-                <div className="frame-body">
-                    <div className={collapsed ? 'leftmenu-shrink' : 'leftmenu'}>
-                        <Menu
-                            defaultSelectedKeys={['1']}
-                            defaultOpenKeys={['sub1']}
-                            mode="inline"
-                            theme="dark"
-                            inlineCollapsed={collapsed}
-                        >
-                            <Menu.Item key="1">
-                                <DashboardOutlined />
-                                <Link to="/dashboard">Dashboard</Link>
-                            </Menu.Item>
-                            <Menu.Item key="2">
-                                <NotificationOutlined />
-                                <Link to="/announcement">Announcement</Link>
-                            </Menu.Item>
-                            <Menu.Item key="3">
-                                <TeamOutlined />
-                                <Link to="/discussion">Discussion</Link>
-                            </Menu.Item>
-                            <Menu.Item key="4">
-                                <InboxOutlined />
-                                <Link to="/question">Question Box</Link>
-                            </Menu.Item>
-                        </Menu>
-                    </div>
-                    <div className="frame-content">
+                <HeadBar />
+                <div className="app-body">
+                    <div className="app-content">
                         <Switch>
-                            <Route path="/dashboard">
-                                <div> This is Dashboard </div>
+                            <Route exact path={["/", "/signup"]}>
+                                {isLoggedIn ? <Redirect to="/dashboard" /> : <Login />}
                             </Route>
-                            <Route path="/announcement">
-                                <div> This is Announcement </div>
-                            </Route>
-                            <Route path="/discussion">
-                                <div> This is Discussion Board </div>
-                            </Route>
-                            <Route path="/question">
-                                <div> This is Question Box </div>
-                            </Route>
+                            {isLoggedIn ? null : <Redirect to="/" />}
+                            <LeftMenu />
+                            <Route path="/dashboard" component={Dashboard} />
+                            <Route path="/announcement" component={Announcement} />
+                            <Route path="/discussion" component={Discussion} />
+                            <Route path="/question" component={Question} />
+                            <Redirect to="/" />
                         </Switch>
                     </div>
                 </div>
             </Router>
-        </div>
+        </div >
     );
 }
 
