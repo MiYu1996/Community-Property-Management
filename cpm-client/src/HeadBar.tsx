@@ -1,10 +1,6 @@
 import React from 'react';
 import { Avatar } from 'antd';
-import {
-    HomeOutlined,
-    BellOutlined,
-    UserOutlined,
-} from '@ant-design/icons';
+import { HomeOutlined, BellOutlined, UserOutlined } from '@ant-design/icons';
 import {
     Switch,
     Route,
