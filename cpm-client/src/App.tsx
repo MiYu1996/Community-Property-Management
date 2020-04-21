@@ -38,9 +38,7 @@ const App = () => {
                 <div className="app-body">
                     <div className="app-content">
                         <Switch>
-                            <Route exact path={["/", "/signup"]} component={Login}>
-                                {isLoggedIn ? <Redirect to="/dashboard" /> : null}
-                            </Route>
+                            <Route exact path={["/", "/signup"]} children={isLoggedIn ? <Redirect to="/dashboard" /> : <Login />} />
                             {isLoggedIn ? null : <Redirect to="/" />}
                             <LeftMenu />
                             <Route path="/dashboard" component={Dashboard} />

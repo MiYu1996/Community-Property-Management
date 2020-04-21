@@ -7,9 +7,15 @@ export type GlobalState = {
     userId: string,
 }
 
-export const globalStore$ = new BehaviorSubject<GlobalState>({
+const initState = {
     isLoggedIn: false,
     token: "",
     expire: 0,
     userId: "",
-})
+}
+
+export const globalStore$ = new BehaviorSubject<GlobalState>(initState)
+
+export const reset = () => {
+    globalStore$.next(initState)
+}

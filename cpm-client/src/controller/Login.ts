@@ -25,7 +25,8 @@ const loginFetch$ = loginRequest$.pipe(
     switchMap(body =>
         fromFetch(new Request('/api/login', { method: 'POST', body: JSON.stringify(body) }))
     ),
-    share()
+    share(),
+    tap(console.log), // DEBUG
 )
 
 export const loginStatus$ = loginFetch$.pipe(

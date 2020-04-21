@@ -1,18 +1,11 @@
 import React from 'react'
-import { render, fireEvent, screen, waitForElement } from '@testing-library/react'
+import { render, fireEvent, screen, waitForElement, cleanup, act } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import App from '../App'
-import { LoginRequest } from '../controller/Login'
+import { reset } from '../controller/App'
+import { mock } from '../fetchMock'
 
-declare global {
-    namespace NodeJS {
-        interface Global {
-            fetch: (input: RequestInfo, init?: RequestInit) => Promise<Response>
-        }
-    }
-}
-
-beforeEach(function () {
+beforeAll(function () {
     Object.defineProperty(window, 'matchMedia', {
         writable: true,
         value: jest.fn().mockImplementation(query => ({
@@ -26,30 +19,13 @@ beforeEach(function () {
             dispatchEvent: jest.fn(),
         })),
     });
-
-    global.fetch = jest.fn().mockImplementation(async (input: RequestInfo, init?: RequestInit) => {
-        if (input instanceof Request) {
-            if (input.url === "/api/login" && input.method === "POST") {
-                const body = await input.json() as LoginRequest
-                switch (body.username) {
-                    case "JSmith":
-                        return new Response(JSON.stringify({
-                            userId: "1234",
-                            token: "qwerty",
-                            expire: 1234567890
-                        }), {
-                            status: 200
-                        })
-                    default:
-                        return new Response("", {
-                            status: 401
-                        })
-                }
-            }
-        }
-        return {}
-    });
+    mock(true)
 });
+
+afterEach(() => {
+    reset()
+    cleanup()
+})
 
 test('successful login', async () => {
     render(<App />)
@@ -61,18 +37,52 @@ test('successful login', async () => {
     const passwordItem = screen.getByTestId("passwordItem")
     const submit = screen.getByTestId("submit")
 
-    fireEvent.click(checkbox)
-    fireEvent.change(username, { target: { value: "JSmith" } })
-    fireEvent.change(password, { target: { value: "!@#QWErty123" } })
+    await act(async () => {
+        fireEvent.click(checkbox)
+        fireEvent.change(username, { target: { value: "JSmith" } })
+        fireEvent.change(password, { target: { value: "!@#QWErty123" } })
+    });
+
     expect(username).toHaveProperty("value", "JSmith")
     expect(password).toHaveProperty("value", "!@#QWErty123")
     expect(checkbox).toHaveProperty("checked", false)
     expect(usernameItem).toHaveClass("ant-form-item-has-success")
     expect(passwordItem).toHaveClass("ant-form-item-has-success")
 
-    fireEvent.click(submit)
-    expect(global.fetch).toHaveBeenCalledTimes(1)
+    await act(async () => {
+        fireEvent.click(submit)
+    });
 
-    await waitForElement(() => screen.getByTestId('app'));
+    expect(global.fetch).toHaveBeenCalledTimes(1)
     expect(location.pathname).toBe("/dashboard");
+})
+
+
+test('unsuccessful login', async () => {
+    render(<App />)
+
+    const username = screen.getByTestId("username")
+    const password = screen.getByTestId("password")
+    const checkbox = screen.getByTestId("checkbox")
+    const usernameItem = screen.getByTestId("usernameItem")
+    const passwordItem = screen.getByTestId("passwordItem")
+    const submit = screen.getByTestId("submit")
+
+    await act(async () => {
+        fireEvent.click(checkbox)
+        fireEvent.change(username, { target: { value: "Alice" } })
+        fireEvent.change(password, { target: { value: "!@#QWErty123" } })
+    });
+    expect(username).toHaveProperty("value", "Alice")
+    expect(password).toHaveProperty("value", "!@#QWErty123")
+    expect(checkbox).toHaveProperty("checked", false)
+    expect(usernameItem).toHaveClass("ant-form-item-has-success")
+    expect(passwordItem).toHaveClass("ant-form-item-has-success")
+
+    await act(async () => {
+        fireEvent.click(submit)
+    });
+
+    expect(global.fetch).toHaveBeenCalledTimes(2)
+    expect(location.pathname).toBe("/");
 })
