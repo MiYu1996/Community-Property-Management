@@ -53,10 +53,10 @@ const LoginForm = () => {
     const validUsername = /^[a-zA-Z0-9]{4,16}$/.test(username)
     const validPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password)
     const validSubmit = validUsername && validPassword
-    var usernameStatus: ValidateStatus =
+    const usernameStatus: ValidateStatus =
         validUsername || !username.length ? "success" : (isSubmitting ? "error" : "warning")
     const usernameHelp = validUsername || !username.length ? null : "4 to 16 letters or numbers"
-    var passwordStatus: ValidateStatus =
+    const passwordStatus: ValidateStatus =
         validPassword || !password.length ? "success" : (isSubmitting ? "error" : "warning")
     const passwordHelp = validPassword || !password.length ? null : "Invalid Password Format"
 
@@ -79,13 +79,7 @@ const LoginForm = () => {
         setSubmitting(true)
         if (validSubmit) requestLogin(username, password, isLongTerm)
     }
-    /*
-    const validLoginBody = {}
-    const login$ = new Subject<LoginBody>()
-    const loginResponse$ = login$.pipe(
-        flatMap(body => fromFetch(new Request('/api/login', { method: 'POST', body: JSON.stringify(body) })))
-    )
-    */
+
     return (
         <Form
             wrapperCol={{ span: 24 }}
@@ -95,32 +89,37 @@ const LoginForm = () => {
                 name="username"
                 rules={[{ required: true, message: 'Please input your username!' }]}
                 validateStatus={usernameStatus}
-                help={usernameHelp} >
+                help={usernameHelp}
+                data-testid="usernameItem" >
                 <Input
                     prefix={<UserOutlined />}
                     placeholder="Username"
                     value={username}
                     onChange={onUsernameChange}
-                    disabled={isSubmitting && validSubmit} />
+                    disabled={isSubmitting && validSubmit}
+                    data-testid="username" />
             </Form.Item>
             <Form.Item
                 name="password"
                 rules={[{ required: true, message: 'Please input your password!' }]}
                 validateStatus={passwordStatus}
-                help={passwordHelp} >
+                help={passwordHelp}
+                data-testid="passwordItem" >
                 <Input.Password
                     prefix={<LockOutlined />}
                     placeholder="Password"
                     value={password}
                     onChange={onPasswordChange}
-                    disabled={isSubmitting && validSubmit} />
+                    disabled={isSubmitting && validSubmit}
+                    data-testid="password" />
             </Form.Item>
             <Form.Item name="remember" valuePropName="checked">
                 <Checkbox
                     style={{ color: "white", userSelect: "none" }}
                     checked={isLongTerm}
                     onChange={onLongtermChange}
-                    disabled={isSubmitting && validSubmit}>
+                    disabled={isSubmitting && validSubmit}
+                    data-testid="checkbox">
                     Remember me for 2 weeks
                 </Checkbox>
             </Form.Item>
@@ -130,7 +129,8 @@ const LoginForm = () => {
                     type="primary"
                     htmlType="submit"
                     onClick={onLoginSubmit}
-                    loading={isSubmitting && validSubmit}>
+                    loading={isSubmitting && validSubmit}
+                    data-testid="submit">
                     Log In
                 </Button>
             </Form.Item>

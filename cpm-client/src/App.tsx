@@ -21,6 +21,7 @@ import { GlobalState, globalStore$ } from './controller/App'
 const App = () => {
     const [isLoggedIn, setLoggedIn] = useState(false)
     const applyState = (state: GlobalState) => {
+        console.log("New state: ", state) //DEBUG
         setLoggedIn(state.isLoggedIn)
     }
     useEffect(() => {
@@ -31,7 +32,7 @@ const App = () => {
     }, [])
 
     return (
-        <div className='app'>
+        <div className='app' data-testid="app">
             <Router>
                 <HeadBar />
                 <div className="app-body">

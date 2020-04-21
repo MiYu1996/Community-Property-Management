@@ -5,7 +5,7 @@ import { switchMap, tap, filter, map, share } from 'rxjs/operators'
 import Hex from 'crypto-js/enc-hex';
 import sha256 from 'crypto-js/sha256';
 
-type LoginRequest = {
+export type LoginRequest = {
     username: string,
     password: string,
     isLongTerm: boolean
@@ -29,12 +29,14 @@ const loginFetch$ = loginRequest$.pipe(
 )
 
 export const loginStatus$ = loginFetch$.pipe(
-    map(response => response.status as LoginStatus)
+    map(response => response.status as LoginStatus),
+    tap(console.log), // DEBUG
 )
 
 export const loginResponse$ = loginFetch$.pipe(
     filter(response => response.status === 200),
-    switchMap(response => from(response.json() as Promise<LoginResponse>))
+    switchMap(response => from(response.json() as Promise<LoginResponse>)),
+    tap(console.log), // DEBUG
 )
 
 export const requestLogin = (username: string, password: string, isLongTerm: boolean) => {

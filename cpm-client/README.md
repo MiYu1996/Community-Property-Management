@@ -17,14 +17,18 @@
 8. Click **Team** - **Check In Everything** to upload
 
 ## Programming Environment
+### Essential Dependencies
+- [TypeScript](https://www.typescriptlang.org/) ([docs](https://www.typescriptlang.org/docs/home.html))
+- [Ant Design](https://ant.design/index-cn) ([docs](https://ant.design/components/button-cn/))
+- [React Router](https://reacttraining.com/react-router/) ([docs](https://reacttraining.com/react-router/core/guides/philosophy))
+- [RxJS](https://rxjs-dev.firebaseapp.com/) ([docs](https://rxjs-dev.firebaseapp.com))
+### Recommended Editor
+- [VSCode](https://code.visualstudio.com/)
 ### Setup
 1. Install [git](https://git-scm.com/) and [yarn](https://yarnpkg.com/)
 2. `git clone https://github.com/MiYu1996/Community-Property-Management.git`
 3. `cd Community-Property-Management/cpm-client`
 4. `yarn install`
-### Recommended Editor
-- [VSCode](https://code.visualstudio.com/)
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
