@@ -37,7 +37,7 @@ const LoginForm = () => {
             ...globalStore$.value,
             isLoggedIn: true,
             token: response.token,
-            tokenLife: response.life,
+            expire: response.expire,
             userId: response.userId,
         })
     }

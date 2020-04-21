@@ -14,7 +14,7 @@ type LoginRequest = {
 export type LoginResponse = {
     userId: string,
     token: string,
-    life: number
+    expire: number
 }
 
 export type LoginStatus = 200 | 401 | 404
