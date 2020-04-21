@@ -24,7 +24,10 @@ const App = () => {
         setLoggedIn(state.isLoggedIn)
     }
     useEffect(() => {
-        globalStore$.subscribe(applyState)
+        const storeSub = globalStore$.subscribe(applyState)
+        return () => {
+            storeSub.unsubscribe()
+        }
     }, [])
 
     return (

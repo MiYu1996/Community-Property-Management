@@ -10,7 +10,6 @@ import Background from '../asset/login_background.jpg';
 import { globalStore$ } from '../controller/App'
 import { requestLogin, LoginStatus, LoginResponse, loginStatus$, loginResponse$ } from '../controller/Login';
 
-
 const loginBackground: CSSProperties = {
     backgroundImage: `url(${Background})`,
 }
@@ -43,8 +42,12 @@ const LoginForm = () => {
         })
     }
     useEffect(() => {
-        loginStatus$.subscribe(handleStatus)
-        loginResponse$.subscribe(handleResponse)
+        const statusSub = loginStatus$.subscribe(handleStatus)
+        const responseSub = loginResponse$.subscribe(handleResponse)
+        return () => {
+            statusSub.unsubscribe()
+            responseSub.unsubscribe()
+        }
     }, [])
 
     const validUsername = /^[a-zA-Z0-9]{4,16}$/.test(username)
