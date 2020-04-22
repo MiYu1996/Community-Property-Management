@@ -3,7 +3,7 @@ import { render, fireEvent, screen, waitForElement, cleanup, act } from '@testin
 import '@testing-library/jest-dom/extend-expect'
 import App from '../App'
 import { reset } from '../controller/App'
-import { mock } from '../fetchMock'
+import { mock } from './fetchMock'
 
 beforeAll(function () {
     Object.defineProperty(window, 'matchMedia', {

@@ -10,11 +10,11 @@ import {
 
 import { HeadBar } from './HeadBar'
 import { LeftMenu } from './LeftMenu'
-import { Login } from './page/Login'
-import { Dashboard } from './page/Dashboard'
-import { Announcement } from './page/Announcement'
-import { Discussion } from './page/Discussion'
-import { Question } from './page/Question'
+import { Login } from './page/login'
+import { Dashboard } from './page/dashboard'
+import { Announcement } from './page/announcement'
+import { Discussion } from './page/discussion'
+import { Question } from './page/question'
 
 import { GlobalState, globalStore$ } from './controller/App'
 
@@ -36,18 +36,20 @@ const App = () => {
             <Router>
                 <HeadBar />
                 <div className="app-body">
-                    <div className="app-content">
-                        <Switch>
-                            <Route exact path={["/", "/signup"]} children={isLoggedIn ? <Redirect to="/dashboard" /> : <Login />} />
-                            {isLoggedIn ? null : <Redirect to="/" />}
+                    <Switch>
+                        <Route exact path={["/", "/signup"]} children={isLoggedIn ? <Redirect to="/dashboard" /> : <Login />} />
+                        {isLoggedIn ? null : <Redirect to="/" />}
+                        <div className="app-content">
                             <LeftMenu />
-                            <Route path="/dashboard" component={Dashboard} />
-                            <Route path="/announcement" component={Announcement} />
-                            <Route path="/discussion" component={Discussion} />
-                            <Route path="/question" component={Question} />
-                            <Redirect to="/" />
-                        </Switch>
-                    </div>
+                            <Switch>
+                                <Route path="/dashboard" component={Dashboard} />
+                                <Route path="/announcement" component={Announcement} />
+                                <Route path="/discussion" component={Discussion} />
+                                <Route path="/question" component={Question} />
+                                <Redirect to="/" />
+                            </Switch>
+                        </div>
+                    </Switch>
                 </div>
             </Router>
         </div >

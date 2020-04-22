@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { mock } from './fetchMock'
+import { mock } from './test/fetchMock'
 
 mock(false, true) //DEBUG
 

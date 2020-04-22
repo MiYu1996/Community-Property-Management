@@ -1,4 +1,4 @@
-import { LoginRequest } from './controller/Login'
+import { LoginRequest } from '../controller/Login'
 
 declare global {
     namespace NodeJS {
@@ -14,7 +14,7 @@ export const mock = (useJest: boolean, useDelay: boolean = false) => {
     const mockedFetch = async (input: RequestInfo, init?: RequestInit) => {
         if (useDelay) await mockDelay(1000);
         if (input instanceof Request) {
-            const url = input.url.replace(/^.*\/\/[^\/]+/, '')
+            const url = input.url.replace(/^.*\/\/[^/]+/, '')
             const method = input.method
             if (url === "/api/login" && method === "POST") {
                 const body = await input.json() as LoginRequest
