@@ -1,0 +1,49 @@
+.announcement {
+    flex-grow: 1;
+    background-color: rgb(240, 242, 245);
+    display: flex;
+    flex-direction: row;
+}
+
+.announcement-title {
+    margin-left: 55px;
+    margin-right: 55px;
+    margin-top: 25px;
+    flex-grow: 1;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    width: 100%;
+    height: 36.5px;
+}
+
+.announcement-title h1{
+    margin-left: 32px;
+    font-size: 1.25em;
+    color: black;
+    /* justify-content: center; */
+    line-height: 36.5px; /*设置line-height与父级元素的height相等*/
+    text-align: center;
+}
+
+/* .announcement-text {
+    margin-left: 96px;
+    font-size: 3.5em;
+    color: white;
+} */
+
+/* 
+.login-left p {
+    margin-left: 96px;
+    margin-right: 48px;
+    font-size: 2em;
+    color: white;
+}
+
+.login-right {
+    flex-grow: 1;
+    background-color: rgba(255, 255, 255, .2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */
