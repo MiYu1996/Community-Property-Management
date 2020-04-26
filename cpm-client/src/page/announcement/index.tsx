@@ -1,52 +1,32 @@
 import React, { CSSProperties }from 'react';
-import { Switch, Route } from "react-router-dom";
+import { Divider } from 'antd';
 
 import './Announcement.css'
 
 export const Announcement = () => {
     return (
         <div className="announcement">
-            <div className="announcement-title">
+            <div className="announcement-post">
                 <h1>Covid-19 Notice</h1>
+                <Divider />
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. 
+
+Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. </p>
+            </div>
+            <div className="announcement-post">
+                <h1>Covid-19 Notice</h1>
+                <Divider />
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. 
+
+Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. </p>
+            </div>
+            <div className="announcement-post">
+                <h1>Covid-19 Notice</h1>
+                <Divider />
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. 
+
+Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. </p>
             </div>
         </div>
     )
 }
-
-
-
-// import './Login.css'
-// import Background from '../../asset/login_background.jpg';
-// import { LoginForm } from './LoginForm'
-// import { SignupForm } from './SignupForm'
-
-// const loginBackground: CSSProperties = {
-//     backgroundImage: `url(${Background})`,
-// }
-
-// export const Login = () => {
-//     return (
-//         <div className="login" style={loginBackground}>
-//             <div className="login-left">
-//                 <Switch>
-//                     <Route exact path="/">
-//                         <h1>Welcome Home</h1>
-//                         <p>Some slogan goes here asjkoasdh oasdioasjdkoaj iojasiopdj asiopdjiopasjdopas iopasj</p>
-//                     </Route>
-//                     <Route path="/signup">
-//                         <h1>This is your new home</h1>
-//                         <p>Thank you for choosing us asjkoasdh oasdioasjdkoaj iojasiopdj asiopdjiopasjdopas iopasj</p>
-//                     </Route>
-//                 </Switch>
-//             </div>
-//             <div className="login-right">
-//                 <div className="login-form">
-//                     <Switch>
-//                         <Route exact path="/" component={LoginForm} />
-//                         <Route path="/signup" component={SignupForm} />
-//                     </Switch>
-//                 </div>
-//             </div>
-//         </div>
-//     )
-// }
