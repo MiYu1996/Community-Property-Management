@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu } from 'antd';
+import { Layout, Menu } from 'antd';
 import {
     DashboardOutlined,
     NotificationOutlined,
@@ -8,10 +8,13 @@ import {
 } from '@ant-design/icons';
 import { Link, useLocation } from "react-router-dom";
 
+const { Sider } = Layout;
+
+
 export const LeftMenu = () => {
     const selected = useLocation().pathname.split("/")[1]
     return (
-        <div className='leftmenu'>
+        <Sider className='leftmenu'>
             <Menu
                 selectedKeys={[selected]}
                 mode="inline"
@@ -34,6 +37,6 @@ export const LeftMenu = () => {
                     <Link to="/question">Question Box</Link>
                 </Menu.Item>
             </Menu>
-        </div>
+        </Sider>
     )
 }
