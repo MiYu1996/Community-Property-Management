@@ -8,7 +8,7 @@ export type GlobalState = {
 }
 
 const initState = {
-    isLoggedIn: false,
+    isLoggedIn: true,
     token: "",
     expire: 0,
     userId: "",

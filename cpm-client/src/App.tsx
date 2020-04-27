@@ -17,6 +17,7 @@ import { Discussion } from './page/discussion'
 import { Question } from './page/question'
 
 import { GlobalState, globalStore$ } from './controller/App'
+import { User } from './page/user';
 
 const App = () => {
     const [isLoggedIn, setLoggedIn] = useState(false)
@@ -46,6 +47,7 @@ const App = () => {
                                 <Route path="/announcement" component={Announcement} />
                                 <Route path="/discussion" component={Discussion} />
                                 <Route path="/question" component={Question} />
+                                <Route path="/user" component={User} />
                                 <Redirect to="/" />
                             </Switch>
                         </div>
