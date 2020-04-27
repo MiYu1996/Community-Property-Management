@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Layout } from 'antd';
 import 'antd/dist/antd.css';
 import './App.css'
 import {
@@ -15,9 +16,12 @@ import { Dashboard } from './page/dashboard'
 import { Announcement } from './page/announcement'
 import { Discussion } from './page/discussion'
 import { Question } from './page/question'
+import { User } from './page/user'
+
 
 import { GlobalState, globalStore$ } from './controller/App'
-import { User } from './page/user';
+
+const { Content } = Layout;
 
 const App = () => {
     const [isLoggedIn, setLoggedIn] = useState(false)
@@ -34,26 +38,31 @@ const App = () => {
 
     return (
         <div className='app' data-testid="app">
-            <Router>
-                <HeadBar />
-                <div className="app-body">
+            <Layout>
+                <Router>
+                    <HeadBar />
                     <Switch>
-                        <Route exact path={["/", "/signup"]} children={isLoggedIn ? <Redirect to="/dashboard" /> : <Login />} />
-                        {isLoggedIn ? null : <Redirect to="/" />}
-                        <div className="app-content">
-                            <LeftMenu />
-                            <Switch>
-                                <Route path="/dashboard" component={Dashboard} />
-                                <Route path="/announcement" component={Announcement} />
-                                <Route path="/discussion" component={Discussion} />
-                                <Route path="/question" component={Question} />
-                                <Route path="/user" component={User} />
-                                <Redirect to="/" />
-                            </Switch>
-                        </div>
+                        <Route exact path={["/", "/signup"]} />
+                        <LeftMenu />
                     </Switch>
-                </div>
-            </Router>
+                    <Content className="app-body">
+                        <Switch>
+                            <Route exact path={["/", "/signup"]} children={isLoggedIn ? <Redirect to="/dashboard" /> : <Login />} />
+                            {isLoggedIn ? null : <Redirect to="/" />}
+                            <div className="app-content">
+                                <Switch>
+                                    <Route path="/dashboard" component={Dashboard} />
+                                    <Route path="/announcement" component={Announcement} />
+                                    <Route path="/discussion" component={Discussion} />
+                                    <Route path="/question" component={Question} />
+                                    <Route path="/user" component={User} />
+                                    <Redirect to="/" />
+                                </Switch>
+                            </div>
+                        </Switch>
+                    </Content>
+                </Router>
+            </Layout>
         </div >
     );
 }
