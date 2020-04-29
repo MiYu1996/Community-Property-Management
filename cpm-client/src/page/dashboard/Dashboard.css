@@ -1,5 +1,104 @@
 .dashboard {
-    flex-grow: 1;
+    width: 100%;
+}
+
+.user-header {
+    background-color: white;
     display: flex;
     flex-direction: row;
+    width: 100%;
+    height: auto;
+}
+
+.user-header-avatar {
+    margin-left: 41px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    size: 64px;
+}
+
+.user-header-left {
+    margin-left: 15px;
+    margin-top: 21px;
+    flex-grow: 1;
+}
+
+.greeting {
+    font-size: 20px;
+}
+
+.user-summary {
+    color: grey;
+}
+
+.user-header-right {
+    margin-top: 14px;
+    margin-right: 29px;
+    text-align: center;
+}
+
+.count-header {
+    color: grey;
+}
+
+.count {
+    font-size: 30px;
+    color: black;
+}
+
+.notifications {
+    margin-top: 23px;
+    margin-left: 23px;
+    margin-right: 23px;
+    height: auto;
+    background-color: white;
+}
+
+.following {
+    height: 48px;
+    padding-top: 20px;
+    padding-left: 32px;
+    padding-right: 32px;
+    font-size: 1.25em;
+    font-weight: bold;
+    color: black;
+    text-align: left;
+}
+
+.notification-list {
+    margin-left: 24px;
+    margin-right: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.notification {
+    display: flex;
+    flex-direction: row;
+}
+
+.poster-avatar {
+    margin-right: 16px;
+}
+
+.notification-summary {
+
+}
+
+.post-summary {
+    display: flex;
+    flex-direction: row;
+}
+
+.poster-name {
+    font-weight: bold;
+    color: black;
+}
+
+.notification-type {
+    color: black;
+}
+
+.post-time {
+    color: grey;
 }
