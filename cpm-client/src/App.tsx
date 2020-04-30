@@ -19,7 +19,7 @@ import { Question } from './page/question'
 import { User } from './page/user'
 
 
-import { GlobalState, globalStore$ } from './controller/App'
+import { globalStore$ } from './controller/App'
 
 const { Content } = Layout;
 

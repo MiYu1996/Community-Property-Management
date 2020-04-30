@@ -1,12 +1,12 @@
-import React, { useState, ChangeEvent, useEffect, useCallback } from 'react';
+import React, { useState, ChangeEvent, useCallback } from 'react';
 
 import { Button, Form, Input, Checkbox, message } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import './Login.css'
-import { globalStore$ } from '../../controller/App'
-import { requestLogin, LoginStatus, LoginResponse, loginStatus$, loginResponse$ } from '../../controller/Login';
+import { globalStore$, useSubcription } from '../../controller/App'
+import { requestLogin, loginStatus$, loginResponse$ } from '../../controller/Requests';
 
 type ValidateStatus = "" | "success" | "warning" | "error" | "validating" | undefined
 
@@ -45,7 +45,7 @@ export const LoginForm = () => {
         if (validSubmit) requestLogin(username, password, isLongTerm)
     }, [username, password, isLongTerm, validSubmit])
 
-    const handleStatus = useCallback((status: LoginStatus) => {
+    useSubcription(loginStatus$, (status: LoginStatus) => {
         setSubmitting(false)
         switch (status) {
             case 401:
@@ -55,9 +55,9 @@ export const LoginForm = () => {
                 message.warning('API Not Implemented');
                 break;
         }
-    }, [])
+    })
 
-    const handleResponse = useCallback((response: LoginResponse) => {
+    useSubcription(loginResponse$, (response: LoginResponse) => {
         globalStore$.next({
             ...globalStore$.value,
             isLoggedIn: true,
@@ -65,16 +65,7 @@ export const LoginForm = () => {
             expire: response.expire,
             userId: response.userId,
         })
-    }, [])
-
-    useEffect(() => {
-        const statusSub = loginStatus$.subscribe(handleStatus)
-        const responseSub = loginResponse$.subscribe(handleResponse)
-        return () => {
-            statusSub.unsubscribe()
-            responseSub.unsubscribe()
-        }
-    }, [handleStatus, handleResponse])
+    })
 
     return (
         <Form
