@@ -59,6 +59,22 @@ export const mock = (useJest: boolean, useDelay: boolean = false) => {
                 }), {
                     status: 200
                 })
+            } else if (url === "/api/announcement" && method === "GET") {
+                if (useDelay) await mockDelay(200);
+                return new Response(JSON.stringify({
+                    announcementIds: ["1", "2", "3", "4", "5", "6"],
+                }), {
+                    status: 200
+                })
+            } else if ((url === "/api/announcement/1" || url === "/api/announcement/2" || url === "/api/announcement/3" || url === "/api/announcement/4" || url === "/api/announcement/5" || url === "/api/announcement/6") && method === "GET") {
+                if (useDelay) await mockDelay(Math.round(2000 * Math.random()));
+                return new Response(JSON.stringify({
+                    time: 1583884800,
+                    title: lorem.generateSentences(1),
+                    body: lorem.generateParagraphs(3),
+                }), {
+                    status: 200
+                })
             } else if (url === "/api/discussion" && method === "GET") {
                 if (useDelay) await mockDelay(200);
                 return new Response(JSON.stringify({

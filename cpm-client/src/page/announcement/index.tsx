@@ -1,32 +1,40 @@
-import React, { CSSProperties }from 'react';
-import { Divider } from 'antd';
+import React, { CSSProperties, useState, useCallback, useMemo, useEffect } from 'react';
+import { Divider, Skeleton } from 'antd';
 
 import './Announcement.css'
+import { useCache, useSubcription } from '../../controller/App';
+import { announcementCache$ } from '../../controller/Caches';
+import { announcementListResponse$, requestAnnouncementList } from '../../controller/Requests';
 
 export const Announcement = () => {
-    return (
-        <div className="announcement">
-            <div className="announcement-post">
-                <h1>Covid-19 Notice</h1>
-                <Divider />
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. 
+    const [announcementIdsToShow, setAnnouncementIdsToShow] = useState<AnnouncementId[]>([])
+    const announcementCache = useCache(announcementCache$)
 
-Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. </p>
-            </div>
-            <div className="announcement-post">
-                <h1>Covid-19 Notice</h1>
-                <Divider />
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. 
-
-Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. </p>
-            </div>
-            <div className="announcement-post">
-                <h1>Covid-19 Notice</h1>
-                <Divider />
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. 
-
-Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. </p>
-            </div>
-        </div>
+    useSubcription(announcementListResponse$, (response: AnnouncementList) =>
+        setAnnouncementIdsToShow(response.announcementIds.slice(0, 10))
     )
+
+    useEffect(requestAnnouncementList, [])
+
+    const listItem = useCallback((id: DiscussionId) => {
+        const announcement = announcementCache(id)
+        if (announcement) {
+            return (
+
+                <div className="announcement-post">
+                    <h1>{announcement.title}</h1>
+                    <Divider />
+                    <p>{announcement.body}</p>
+                </div>
+            )
+        } else {
+            return <div className="discussion-li" key={id}><Skeleton active /></div>
+        }
+    }, [announcementCache])
+
+    const announcementList = useMemo(() => (
+        < div className="announcement" children={announcementIdsToShow.map(listItem)} />
+    ), [announcementIdsToShow, listItem])
+
+    return announcementList
 }
