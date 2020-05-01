@@ -1,16 +1,18 @@
-import { useEffect, useState, useMemo, useCallback } from 'react';
-import { Observable, BehaviorSubject, Subject } from 'rxjs'
+import { useEffect, useState } from 'react';
+import { Observable, BehaviorSubject } from 'rxjs'
 import { cacheKey$, cacheValue, LinkedCache } from './Caches';
-import { share } from 'rxjs/operators';
 
 const initState: GlobalState = {
-    isLoggedIn: true,
+    host: "localhost:8080",
+    isLoggedIn: false,
     token: "",
     expire: 0,
     userId: "",
 }
 
 export const globalStore$ = new BehaviorSubject<GlobalState>(initState)
+
+export const globalVal = () => globalStore$.value
 
 export const reset = () => {
     globalStore$.next(initState)

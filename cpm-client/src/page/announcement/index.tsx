@@ -20,7 +20,6 @@ export const Announcement = () => {
         const announcement = announcementCache(id)
         if (announcement) {
             return (
-
                 <div className="announcement-post">
                     <h1>{announcement.title}</h1>
                     <Divider />
@@ -28,7 +27,7 @@ export const Announcement = () => {
                 </div>
             )
         } else {
-            return <div className="discussion-li" key={id}><Skeleton active /></div>
+            return <div className="announcement-post" key={id}><Skeleton active /></div>
         }
     }, [announcementCache])
 

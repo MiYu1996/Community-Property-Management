@@ -1,6 +1,7 @@
 type OneToOneRequestProvider = (url: string, param?: any) => Request
 
 type GlobalState = {
+    host: string,
     isLoggedIn: boolean,
     token: string,
     expire: number,
@@ -187,12 +188,12 @@ type Company = {
 
 /* Notification */
 
-type Notification = {
+type ANotification = {
     time: number,
     sender: UserId,
     body: any,
 }
 
 type NotificationList = {
-    notifications: Notification[]
+    notifications: ANotification[]
 }

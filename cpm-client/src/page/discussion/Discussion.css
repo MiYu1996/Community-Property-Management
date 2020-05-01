@@ -70,3 +70,13 @@
     justify-content: center;
     align-items: center;
 }
+
+.discussion-author {
+    text-align: right;
+}
+
+.discussion-content-title, .discussion-content-body, .discussion-author, .comment-li {
+    background-color: white;
+    margin: 16px;
+    padding: 12px;
+}

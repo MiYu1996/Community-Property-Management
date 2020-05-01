@@ -7,7 +7,7 @@ export const rxOneToOne = <T = undefined>(url: string, rp: OneToOneRequestProvid
     const fetch$ = request$.pipe(
         (exclusive ? switchMap : flatMap)(param =>
             fromFetch(rp(url, param))
-                .pipe(map(response => [param, response]))),
+                .pipe(map(response => [param, response]), tap(p => console.log(p)))),
         share(),
     )
     return [request$, fetch$] as [Subject<T>, Observable<[T, Response]>]

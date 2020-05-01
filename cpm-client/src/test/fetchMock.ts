@@ -82,6 +82,13 @@ export const mock = (useJest: boolean, useDelay: boolean = false) => {
                 }), {
                     status: 200
                 })
+            } else if (url === "/api/discussion/new" && method === "POST") {
+                if (useDelay) await mockDelay(200);
+                return new Response(JSON.stringify({
+                    discussionId: "1"
+                }), {
+                    status: 200
+                })
             } else if ((url === "/api/discussion/1" || url === "/api/discussion/2" || url === "/api/discussion/3" || url === "/api/discussion/4" || url === "/api/discussion/5" || url === "/api/discussion/6") && method === "GET") {
                 if (useDelay) await mockDelay(Math.round(2000 * Math.random()));
                 return new Response(JSON.stringify({
@@ -90,6 +97,34 @@ export const mock = (useJest: boolean, useDelay: boolean = false) => {
                     title: lorem.generateSentences(1),
                     body: lorem.generateParagraphs(3),
                     commentIds: ["1", "2", "3", "4"],
+                }), {
+                    status: 200
+                })
+            } else if ((url === "/api/comment/1" || url === "/api/comment/2" || url === "/api/comment/3" || url === "/api/comment/4" || url === "/api/comment/5" || url === "/api/comment/6") && method === "GET") {
+                if (useDelay) await mockDelay(Math.round(2000 * Math.random()));
+                return new Response(JSON.stringify({
+                    time: 1583884800,
+                    author: "1234",
+                    body: lorem.generateParagraphs(1),
+                }), {
+                    status: 200
+                })
+            } else if ((url === "/api/notification") && method === "GET") {
+                if (useDelay) await mockDelay(Math.round(2000 * Math.random()));
+                return new Response(JSON.stringify({
+                    notifications: [{
+                        time: 1583884800,
+                        sender: "1234",
+                        body: lorem.generateParagraphs(1),
+                    }, {
+                        time: 1583884800,
+                        sender: "1234",
+                        body: lorem.generateParagraphs(1),
+                    }, {
+                        time: 1583884800,
+                        sender: "1234",
+                        body: lorem.generateParagraphs(1),
+                    }]
                 }), {
                     status: 200
                 })

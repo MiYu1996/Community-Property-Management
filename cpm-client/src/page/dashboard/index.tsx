@@ -1,11 +1,43 @@
-import React from 'react';
-import {Avatar, Divider} from 'antd';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Link } from "react-router-dom";
+import { Avatar, Divider, Skeleton } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
 import './Dashboard.css';
-import {Link} from "react-router-dom";
+import { notificationListResponse$, requestNotificationList } from '../../controller/Requests';
+import { useSubcription, useCache, formatTime } from '../../controller/App';
+import { userCache$ } from '../../controller/Caches';
 
 export const Dashboard = () => {
+    const userCache = useCache(userCache$)
+    const [notificationsToShow, setNotificationsToShow] = useState<ANotification[]>([])
+
+    useSubcription(notificationListResponse$, (response: NotificationList) =>
+        setNotificationsToShow(response.notifications.slice(0, 10))
+    )
+
+    useEffect(requestNotificationList, [])
+
+    const listItem = useCallback((notification: ANotification) => {
+        const sender = userCache(notification.sender)
+        if (sender) {
+            return (
+                <div className="notification">
+                    <div className="poster-avatar"><Avatar size={40} icon={<UserOutlined />} /></div>
+                    <div className="notification-summary">
+                        <div className="post-summary">
+                            <div className="poster-name">{sender.firstName}</div>
+                            <div className="notification-type">&nbsp;{notification.body}&nbsp;</div>
+                        </div>
+                        <div className="post-time">{formatTime(notification.time)}</div>
+                    </div>
+                </div>
+            )
+        } else {
+            return <Skeleton active />
+        }
+    }, [userCache, notificationsToShow])
+
     return (
         <div className="dashboard">
             <div className="user-header">
@@ -23,42 +55,7 @@ export const Dashboard = () => {
                 <div className="following">Following</div>
                 <Divider />
                 <div className="notification-list">
-                    <div className="notification">
-                        <div className="poster-avatar"><Avatar size={40} icon={<UserOutlined />} /></div>
-                        <div className="notification-summary">
-                            <div className="post-summary">
-                                <div className="poster-name">Admin</div>
-                                <div className="notification-type">&nbsp;published new announcement&nbsp;</div>
-                                <Link to="/announcement">COVID-19 Notice</Link>
-                            </div>
-                            <div className="post-time">Just now</div>
-                        </div>
-                    </div>
-                    <Divider />
-                    <div className="notification">
-                        <div className="poster-avatar"><Avatar size={40} icon={<UserOutlined />} /></div>
-                        <div className="notification-summary">
-                            <div className="post-summary">
-                                <div className="poster-name">Alex</div>
-                                <div className="notification-type">&nbsp;created new discussion&nbsp;</div>
-                                <Link to="/discussion">Who wants to order DoorDash together?</Link>
-                            </div>
-                            <div className="post-time">3-28</div>
-                        </div>
-                    </div>
-                    <Divider />
-                    <div className="notification">
-                        <div className="poster-avatar"><Avatar size={40} icon={<UserOutlined />} /></div>
-                        <div className="notification-summary">
-                            <div className="post-summary">
-                                <div className="poster-name">Maintenance</div>
-                                <div className="notification-type">&nbsp;replied your question&nbsp;</div>
-                                <Link to="/question">When will the street light be repaired?</Link>
-                            </div>
-                            <div className="post-time">3-25</div>
-                        </div>
-                    </div>
-                    <Divider />
+                    {notificationsToShow.map(listItem).reduce((r: JSX.Element[], a: JSX.Element) => r.concat(a, (<Divider />)), [])}
                 </div>
             </div>
 
