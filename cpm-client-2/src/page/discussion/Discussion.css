@@ -1,0 +1,82 @@
+.discussion {
+    margin: auto;
+    margin-top: 25px;
+    width: 90%;
+}
+
+.discussion-newpost {
+    background-color: white;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    color: rgba(0, 0, 0, 0.65);
+    transition: all linear .2s;
+}
+
+.discussion-newpost:hover {
+    background-color: lightgray;
+}
+
+.discussion-li {
+    background-color: white;
+    margin-bottom: 16px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    display: flex;
+    flex-direction: row;
+    height: 96px;
+    overflow-y: hidden;
+}
+
+.ant-skeleton {
+    background-color: #F9F9F9;
+}
+
+.discussion-li-replies {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.discussion-li-replies-count {
+    font-size: 48px;
+    line-height: 48px;
+}
+
+.discussion-li-replies-label {
+    font-size: 12px;
+    align-self: flex-end;
+}
+
+.discussion-li-title {
+    max-height: 24px;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.discussion-li-body {
+    max-height: 48px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+}
+
+.discussion-li-author {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.discussion-author {
+    text-align: right;
+}
+
+.discussion-content-title, .discussion-content-body, .discussion-author, .comment-li {
+    background-color: white;
+    margin: 16px;
+    padding: 12px;
+}

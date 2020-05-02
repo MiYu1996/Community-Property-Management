@@ -1,0 +1,91 @@
+#root {
+    height: 100%;
+}
+
+.app {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+.headbar {
+    background-color: #008080;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+}
+
+.headbar-logo {
+    width: 256px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    color: white;
+    opacity: .80;
+}
+
+.headbar-name {
+    flex-grow: 1;
+    padding-left: 23px;
+    display: flex;
+    align-items: center;
+    font-size: 2em;
+    color: white;
+    white-space: nowrap;
+}
+
+.headbar-user, .headbar-login{
+    width: 256px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    white-space: nowrap;
+}
+
+.headbar-user-bell {
+    margin-right: 10px;
+    font-size: x-large;
+}
+
+.headbar-user-avatar {
+    margin-right: 10px;
+}
+
+.headbar-login a {
+    color: white;
+}
+
+.app-body {
+    flex-grow: 1;
+    display: flex;
+    flex-flow: row;
+}
+
+.leftmenu {
+    margin-top: 64px;
+    height: 100%;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+}
+
+.leftmenu, .ant-menu, .ant-menu-sub {
+    background-color: #2F3F3F !important;
+}
+
+.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-selected {
+    background-color: seagreen
+}
+
+.app-content {
+    margin-top: 64px;
+    margin-left: 200px;
+    flex-grow: 1;
+    display: flex;
+}
